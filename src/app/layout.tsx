@@ -15,7 +15,7 @@ export const metadata: Metadata = {
     template: "%s | Espanachollos",
   },
   verification: {
-    google: "02EsY9lsHx9uIWWofpJSWyW4yn0bAPTutopuIkN2QNo",
+    // google: "02EsY9lsHx9uIWWofpJSWyW4yn0bAPTutopuIkN2QNo",
   },
 
   description:
