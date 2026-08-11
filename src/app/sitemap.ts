@@ -1,7 +1,7 @@
 import { MetadataRoute } from 'next';
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
-  const baseUrl = 'https://espanachollos.es';
+  const baseUrl = 'https://espanadeal.es';
 
   // 1. Tes pages statiques principales (basées sur tes dossiers)
   const staticPages = [

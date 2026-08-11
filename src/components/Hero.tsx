@@ -6,46 +6,45 @@ import Link from "next/link";
 const SLIDES_DATA = [
   {
     id: 1,
-    title: "Apple iPhone 17 Pro Max & High-Tech",
-    subtitle: "Última Tecnología",
-    description: "Descubre el espectacular iPhone 17 Pro Max y nuestra selección exclusiva de Apple y tecnología premium al mejor precio en EspanaChollos.",
-    image: "https://c0.lestechnophiles.com/images.frandroid.com/wp-content/uploads/2025/09/apple-iphone-17-pro-max-frandroid-2025-768x768.png?webp=1&key=edb35fd1",
-    btnText: "Ver iPhone 17 Pro Max",
-    link: "/produits/39" // Redirige directement vers le produit iPhone 17 Pro Max
+    title: "Dispositivos Electrónicos: iPhone, PS5 y Accesorios High-Tech",
+    subtitle: "Tecnología y Gaming",
+    description: "Equípate con lo mejor de la tecnología. Encuentra el iPhone, la PlayStation 5, la Nintendo Switch y nuestros auriculares Bluetooth con entrega rápida en España.",
+    image: "https://images.unsplash.com/photo-1606813907291-d86efa9b94db?w=1000&auto=format&fit=crop&q=80",
+    btnText: "Ver High-Tech",
+    link: "/produits?cat=electronique"
   },
-  {
+  { 
     id: 2,
-    title: "Audio Premium: Sony WH-1000XM5SA & AirPods Pro 3",
-    subtitle: "Sonido y Cancelación de Ruido",
-    description: "Disfruta de una calidad de audio insuperable y una cancelación activa de ruido perfecta con los auriculares top del mercado.",
-    image: "/img/SonyWH-1000XM5SA.jpg",
-    btnText: "Comprar Auriculares",
-    link: "/produits/14" // Redirige vers le casque Sony (ou /produits?cat=electronique)
+    title: "Deporte y Fitness: Alcanza tus objetivos en casa",
+    subtitle: "Rendimiento y Salud",
+    description: "Quema calorías con nuestras bicicletas de spinning, bicicletas eléctricas, mancuernas, relojes inteligentes y un equipamiento completo de gimnasio en casa.",
+    image: "https://images.unsplash.com/photo-1517838277536-f5f99be501cd?w=1000&auto=format&fit=crop&q=80",
+    btnText: "Descubrir el universo Deporte",
+    link: "/produits?cat=sport"
   },
   {
     id: 3,
-    title: "Zapatillas Deportivas Urbanas: Adidas & PUMA",
-    subtitle: "Moda y Tendencias",
-    description: "Renueva tu estilo diario con las zapatillas PUMA Tazon 6, Puma Smash y Adidas VS Pace 2.0. Comodidad y diseño al mejor precio.",
-    image: "/img/PUMATazon6FractureFM.jpg",
-    btnText: "Ver Colección Sneakers",
-    link: "/produits?cat=sport" // Renvoie vers la catégorie Sport / Fitness
+    title: "Moda y Sneakers: Camina con estilo todos los días",
+    subtitle: "Tendencias Urbanas",
+    description: "Marca la diferencia con nuestra selección exclusiva de Sneakers Nike, Jordan y New Balance auténticas y cómodas.",
+    image: "https://images.unsplash.com/photo-1552346154-21d32810aba3?w=1000&auto=format&fit=crop&q=80",
+    btnText: "Comprar mis Sneakers",
+    link: "/produits?cat=mode"
   },
   {
     id: 4,
-    title: "Apple Watch Series 9 & Accesorios GaN 100W",
-    subtitle: "Estilo de Vida Inteligente",
-    description: "Mantente conectado con el Apple Watch Series 9 (GPS + Cellular) de 45 MM y optimiza tus cargas con la tecnología rápida GaN III de CUKTECH.",
-    image: "/img/AppleWatchSeries9.jpg",
-    btnText: "Explorar Accesorios",
-    link: "/produits/15" // Redirige vers l'Apple Watch
+    title: "Belleza y Hogar: Cuida de ti y de tu entorno",
+    subtitle: "Bienestar y Confort",
+    description: "Mejora tu rutina con nuestros perfumes y productos de skincare / capilares, mientras simplificas tu día a día con la freidora de aire y nuestros robots aspiradores.",
+    image: "https://images.unsplash.com/photo-1541643600914-78b084683601?w=1000&auto=format&fit=crop&q=80",
+    btnText: "Explorar la selección",
+    link: "/produits?cat=beaute"
   }
 ];
 
 export default function Hero() {
   const [currentSlide, setCurrentSlide] = useState(0);
 
-  // Gestion du défilement automatique toutes les 5 secondes
   useEffect(() => {
     const timer = setInterval(() => {
       setCurrentSlide((prev) => (prev + 1) % SLIDES_DATA.length);
@@ -56,20 +55,16 @@ export default function Hero() {
   return (
     <section className="hero-section-container">
       
-      {/* COMPOSANT DE GAUCHE : LE SLIDER DYNAMIQUE */}
+      {/* SLIDER DINÁMICO */}
       <div className="hero-slider-left">
         {SLIDES_DATA.map((slide, index) => (
           <div 
             key={slide.id} 
             className={`hero-slide ${index === currentSlide ? "slide-active" : ""}`}
           >
-            {/* Image de fond simple */}
             <img src={slide.image} alt={slide.title} className="slide-bg-img" />
-            
-            {/* Voile sombre texturé pour garantir la lisibilité du texte blanc */}
             <div className="slide-overlay"></div>
 
-            {/* Contenu textuel */}
             <div className="slide-content">
               <span className="slide-tag">{slide.subtitle}</span>
               <h2 className="slide-title">{slide.title}</h2>
@@ -81,7 +76,6 @@ export default function Hero() {
           </div>
         ))}
 
-        {/* Boutons indicateurs (Dots) en bas au centre du slider */}
         <div className="slider-dots">
           {SLIDES_DATA.map((_, index) => (
             <button
@@ -95,32 +89,32 @@ export default function Hero() {
         </div>
       </div>
 
-      {/* COMPOSANT DE DROITE : LES DEUX ENCARTS STATIQUES */}
+      {/* BANNERS ESTÁTICOS */}
       <div className="hero-banners-right">
   
-        {/* Encart Haut - Sneakers */}
+        {/* Banner Superior */}
         <div className="right-banner-card text-light">
           <img 
             src="https://images.unsplash.com/photo-1552346154-21d32810aba3?w=600&auto=format&fit=crop&q=80" 
-            alt="Sneakers Tendance" 
+            alt="Sneakers de Tendencia" 
             className="banner-bg-img" 
           />
           <div className="banner-overlay"></div>
           <div className="banner-content">
             <span className="banner-tag text-red">Moda</span>
             <h3>Sneakers de Tendencia: Nike, Jordan y New Balance</h3>
-            <p>Encuentra los mejores estilos de zapatillas en Espanadeal.</p>
+            <p>Encuentra los mejores estilos de zapatillas en Espana Chollos.</p>
             <Link href="/produits?cat=mode" className="btn-banner-small">
               Comprar
             </Link>
           </div>
         </div>
 
-        {/* Encart Bas - Wearables / Électronique */}
+        {/* Banner Inferior */}
         <div className="right-banner-card text-light">
           <img 
             src="https://images.unsplash.com/photo-1505740420928-5e560c06d30e?w=600&auto=format&fit=crop&q=80" 
-            alt="Écouteurs et Montres Connectées" 
+            alt="Auriculares y Relojes Inteligentes" 
             className="banner-bg-img" 
           />
           <div className="banner-overlay"></div>

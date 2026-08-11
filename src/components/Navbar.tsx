@@ -8,8 +8,8 @@ import { usePathname, useRouter } from "next/navigation";
 
 export default function Navbar() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const [searchTxt, setSearchTxt] = useState("");          // ESTATO PARA EL TEXTO DE BÚSQUEDA
-  const [searchCat, setSearchCat] = useState("");          // ESTATO PARA LA CATEGORÍA SELECCIONADA
+  const [searchTxt, setSearchTxt] = useState("");
+  const [searchCat, setSearchCat] = useState("");
   const { cartCount } = useCart();
   const pathname = usePathname();
   const router = useRouter();
@@ -20,8 +20,8 @@ export default function Navbar() {
     if (searchCat) {
       url += `&cat=${searchCat}`;
     }
-    setIsMenuOpen(false); // Cierra la barra lateral móvil por si acaso
-    router.push(url);     // Envía al usuario a la URL filtrada
+    setIsMenuOpen(false);
+    router.push(url);
   };
 
   return (
@@ -42,7 +42,7 @@ export default function Navbar() {
           <Link href="/">
             <img
               src="/img/logo.png" 
-              alt="Logo" 
+              alt="ESPANA CHOLLOS Logo" 
             />
           </Link>
         </div>
@@ -75,7 +75,7 @@ export default function Navbar() {
             </button>
           </form>
         </div>
-
+ 
         {/* Acciones Iconos */}
         <div className="nav-actions">
           <Link href="/contact" className="action-icon fav-desktop" aria-label="Contacto">
@@ -127,7 +127,7 @@ export default function Navbar() {
           <input 
             type="text" 
             placeholder="Buscar productos..." 
-            className="search-input"
+            className="search-input" 
             value={searchTxt}
             onChange={(e) => setSearchTxt(e.target.value)}
           />

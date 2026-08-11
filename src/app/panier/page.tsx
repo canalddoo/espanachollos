@@ -10,7 +10,7 @@ import { loadStripe } from "@stripe/stripe-js";
 import { Elements } from "@stripe/react-stripe-js";
 import StripeCheckoutForm from "@/components/StripeCheckoutForm";
 
-// Initialisation de Stripe avec ta clé publique (hors du composant pour éviter les rechargements)
+// Initialisation de Stripe avec ta clé publique
 const stripePromise = loadStripe(process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY as string);
 
 export default function CartPage() {
@@ -18,13 +18,14 @@ export default function CartPage() {
   const [showSuccessPopup, setShowSuccessPopup] = useState(false); // Étape 1 : Commande reçue
   const [showPaymentModal, setShowPaymentModal] = useState(false); // Étape 2 : Choix du paiement
   const [currentOrderRef, setCurrentOrderRef] = useState("");
-  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [isSubmitting, setIsSubmitting] = useState(false); 
   const router = useRouter();
 
   // États pour Stripe et les méthodes de paiement
   const [paymentMethod, setPaymentMethod] = useState<"card" | "bank" | null>(null);
   const [clientSecret, setClientSecret] = useState<string | null>(null);
   const [bankInfo, setBankInfo] = useState({ beneficiary: "Cargando...", iban: "Cargando...", bic: "Cargando..." });
+  const [showEmailPromptPopup, setShowEmailPromptPopup] = useState(false);
 
   const totalPrice = cart.reduce((acc: number, item: any) => acc + item.price * item.quantity, 0);
 
@@ -53,7 +54,7 @@ export default function CartPage() {
     };
 
     try {
-      // 1. Envoi de la commande à l'admin (Sauvegarde dans Turso)
+      // 1. Envoi de la commande à l'admin
       const response = await fetch("/api/orders", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
@@ -61,7 +62,7 @@ export default function CartPage() {
       });
 
       if (response.ok) {
-        // 2. Demander un ticket de paiement (Client Secret) à notre route API Stripe
+        // 2. Demander un ticket de paiement (Client Secret)
         const stripeRes = await fetch("/api/create-payment-intent", {
           method: "POST",
           headers: { "Content-Type": "application/json" },
@@ -92,8 +93,9 @@ export default function CartPage() {
   };
 
   const handlePaymentSuccess = () => {
-    alert("¡Pago recibido con éxito! Muchas gracias por su compra.");
-    handleFinalizeOrder();
+    // Ouvre le popup d'envoi d'e-mail et ferme le modal de sélection de paiement
+    setShowPaymentModal(false);
+    setShowEmailPromptPopup(true);
   };
 
   const handleFinalizeOrder = () => {
@@ -185,51 +187,53 @@ export default function CartPage() {
       {/* 2. LE GRAND MODAL DE PAIEMENT (STRIPE OU VIREMENT) */}
       {showPaymentModal && (
         <div className="payment-modal-overlay" style={{ zIndex: 9998 }}>
-    <div className="payment-modal-card" style={{ maxWidth: "450px", padding: "20px" }}> {/* max-width réduit à 450px et padding à 20px */}
-      <div className="payment-modal-header" style={{ marginBottom: "15px", textAlign: "center" }}>
-        <h2 style={{ fontSize: "20px", marginBottom: "6px" }}>Método de Pago</h2> {/* Titre plus petit (20px au lieu de la taille par défaut) */}
-        <p style={{ fontSize: "14px", color: "#666", lineHeight: "1.4" }}>
-          Seleccione cómo desea pagar su pedido <strong>#{currentOrderRef}</strong> por un total de <strong>{totalPrice.toLocaleString()} €</strong>.
-        </p> {/* Texte explicatif réduit à 14px */}
-      </div>
+          <div className="payment-modal-card" style={{ maxWidth: "450px", padding: "20px" }}>
+            <div className="payment-modal-header" style={{ marginBottom: "15px", textAlign: "center" }}>
+              <h2 style={{ fontSize: "20px", marginBottom: "6px" }}>Método de Pago</h2>
+              <p style={{ fontSize: "14px", color: "#666", lineHeight: "1.4" }}>
+                Seleccione cómo desea pagar su pedido <strong>#{currentOrderRef}</strong> por un total de <strong>{totalPrice.toLocaleString()} €</strong>.
+              </p>
+            </div>
 
-      {/* Onglets de sélection réduits */}
-      <div style={{ display: "flex", gap: "8px", marginBottom: "15px" }}> {/* Espacement réduit à 8px */}
-        <button 
-          onClick={() => setPaymentMethod("card")}
-          style={{ 
-            flex: 1, 
-            padding: "8px 10px", // Padding réduit (plus compact)
-            fontSize: "14px", // Police réduite à 14px
-            borderRadius: "6px", 
-            border: "2px solid", 
-            borderColor: paymentMethod === "card" ? "#0070f3" : "#ccc", 
-            background: paymentMethod === "card" ? "#f0f7ff" : "#fff", 
-            cursor: "pointer", 
-            fontWeight: "bold" 
-          }}
-          type="button"
-        >
-          <i className="far fa-credit-card"></i> Tarjeta
-        </button>
-        <button 
-          onClick={() => setPaymentMethod("bank")}
-          style={{ 
-            flex: 1, 
-            padding: "8px 10px", // Padding réduit
-            fontSize: "14px", // Police réduite à 14px
-            borderRadius: "6px", 
-            border: "2px solid", 
-            borderColor: paymentMethod === "bank" ? "#0070f3" : "#ccc", 
-            background: paymentMethod === "bank" ? "#f0f7ff" : "#fff", 
-            cursor: "pointer", 
-            fontWeight: "bold" 
-          }}
-          type="button"
-        >
-          <i className="fas fa-university"></i> Transferencia
-        </button>
-      </div>
+            {/* Onglets de sélection */}
+            <div style={{ display: "flex", gap: "8px", marginBottom: "15px" }}>
+              <button 
+                onClick={() => setPaymentMethod("card")}
+                style={{ 
+                  flex: 1, 
+                  padding: "8px 10px",
+                  fontSize: "14px",
+                  borderRadius: "6px", 
+                  border: "2px solid", 
+                  borderColor: paymentMethod === "card" ? "#ff4e00" : "#ccc", 
+                  background: paymentMethod === "card" ? "#fff5f0" : "#fff", 
+                  color: paymentMethod === "card" ? "#ff4e00" : "#333",
+                  cursor: "pointer", 
+                  fontWeight: "bold" 
+                }}
+                type="button"
+              >
+                <i className="far fa-credit-card"></i> Tarjeta
+              </button>
+              <button 
+                onClick={() => setPaymentMethod("bank")}
+                style={{ 
+                  flex: 1, 
+                  padding: "8px 10px",
+                  fontSize: "14px",
+                  borderRadius: "6px", 
+                  border: "2px solid", 
+                  borderColor: paymentMethod === "bank" ? "#ff4e00" : "#ccc", 
+                  background: paymentMethod === "bank" ? "#fff5f0" : "#fff", 
+                  color: paymentMethod === "bank" ? "#ff4e00" : "#333",
+                  cursor: "pointer", 
+                  fontWeight: "bold" 
+                }}
+                type="button"
+              >
+                <i className="fas fa-university"></i> Transferencia
+              </button>
+            </div>
 
             {/* CONTENU OPTION 1 : FORMULAIRE STRIPE */}
             {paymentMethod === "card" && clientSecret && (
@@ -240,7 +244,7 @@ export default function CartPage() {
               </div>
             )}
 
-            {/* CONTENU OPTION 2 : VIREMENT BANCAIRE (DYNAMIQUE) */}
+            {/* CONTENU OPTION 2 : VIREMENT BANCAIRE */}
             {paymentMethod === "bank" && (
               <div>
                 <div className="payment-modal-details" style={{ marginTop: "10px" }}>
@@ -259,6 +263,53 @@ export default function CartPage() {
                 </button>
               </div>
             )}
+          </div>
+        </div>
+      )}
+
+      {/* 3. POPUP DE CONFIRMATION ET D'ENVOI D'E-MAIL APRÈS PAIEMENT */}
+      {showEmailPromptPopup && (
+        <div className="payment-modal-overlay" style={{ zIndex: 9999 }}>
+          <div className="payment-modal-card" style={{ textAlign: "center", padding: "40px 30px", maxWidth: "450px" }}>
+            <div style={{ fontSize: "50px", color: "#ff4e00", marginBottom: "20px" }}>
+              <i className="fas fa-envelope-open-text"></i>
+            </div>
+            <h2 style={{ fontSize: "22px", color: "#1a1a1a", marginBottom: "12px" }}>¡Pago Recibido con Éxito!</h2>
+            <p style={{ color: "#666", marginBottom: "25px", fontSize: "15px", lineHeight: "1.5" }}>
+              Para agilizar el procesamiento y envío de su pedido <strong>#{currentOrderRef}</strong>, haga clic en el botón de abajo para enviarnos una confirmación a <strong>contact@espanachollos.es</strong>.
+            </p>
+            
+            {/* Bouton d'envoi de mail pré-rempli */}
+            <a 
+              href={`mailto:contact@espanachollos.es?subject=Confirmación de Pago - Pedido %23${currentOrderRef}&body=Hola Espanachollos,%0D%0A%0D%0AHe realizado correctamente el pago con tarjeta para mi pedido %23${currentOrderRef}.%0D%0A%0D%0AUn saludo.`}
+              className="btn-see-more"
+              style={{ 
+                display: "inline-flex", 
+                width: "100%", 
+                marginBottom: "12px", 
+                textDecoration: "none",
+                boxSizing: "border-box"
+              }}
+            >
+              Enviar Correo de Confirmación <i className="fas fa-paper-plane" style={{ marginLeft: "10px" }}></i>
+            </a>
+
+            {/* Lien secondaire discret pour finaliser sans envoyer */}
+            <button
+              onClick={handleFinalizeOrder}
+              style={{
+                background: "none",
+                border: "none",
+                color: "#ff4e00",
+                cursor: "pointer",
+                fontSize: "14px",
+                fontWeight: "500",
+                textDecoration: "underline"
+              }}
+              type="button"
+            >
+              Volver a la tienda
+            </button>
           </div>
         </div>
       )}

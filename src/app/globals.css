@@ -4,7 +4,7 @@
 
 /* --- DECLARATION DES VARIABLES DE COULEURS & CONFIG --- */
 :root {
-  --color-primary: #ff4e00;    /* Bleu principal Espanadeal */
+ --color-primary: #ff4e00;    /* Bleu principal Espanadeal */
   --color-white: #FFFFFF;      /* Blanc */
   --color-black: #1A1A1A;      /* Noir doux pour le texte */
   --color-gray-bg: #F0F2F5;    /* Gris clair pour fond recherche */
@@ -30,7 +30,7 @@ body {
 }
 /* --- CONFIGURATION GENERALE DE LA PAGE --- */
 .home-page-container {
-  max-width: 1200px;
+  max-width: 1250px;
   margin: 0 auto;
   padding: 30px 20px;
 }
@@ -43,6 +43,7 @@ body {
   position: relative;
 }
 /* GRILLE RESPONSIVE PRO (4 colonnes desktop, 3 tablette, 2 mobile) */
+
 .products-grid {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
@@ -50,6 +51,7 @@ body {
 }
 
 /* CARTE PRODUIT STYLE MINI */
+
 .product-card {
   background: #ffffff;
   display: flex;
@@ -60,7 +62,7 @@ body {
 /* CADRE DE L'IMAGE CUBIQUE ET PARFAITEMENT CENTRÉ */
 .product-image-wrapper {
   position: relative;
-  width: 100%;
+  width: 95%;
   aspect-ratio: 1 / 1; /* Cadre carré parfait */
   background-color: #fff;
   overflow: hidden;
@@ -131,13 +133,13 @@ body {
   margin-bottom: 12px;
 }
 
-/* BOUTONS ACTIONS ACCUEIL */
+/* BOUTONS ACTIONS ACCUEIL */ 
 .product-card-actions {
   display: flex;
   gap: 8px;
-  margin-top: auto; /* Aligne les boutons au même niveau tout en bas */
   margin: auto;
-  width: 90%;
+  margin-top: auto; /* Aligne les boutons au même niveau tout en bas */
+  width: 95%;
 }
 
 .btn-add-cart {
@@ -172,7 +174,7 @@ body {
 }
 
 .btn-buy-now:hover {
-  background-color: #00337C;
+  background-color: #ff4e00;
 }
 
 /* --- MEDIA QUERIES (RESPONSIVE COMPLET) --- */
@@ -412,7 +414,7 @@ body {
   color: #4b5563;
 }
 
-.free-shipping { 
+.free-shipping {
   color: #10b981;
   font-weight: 500;
 }
@@ -432,7 +434,7 @@ body {
 
 .btn-checkout {
   width: 100%;
-  background-color: #004aad;
+  background-color: #ff4e00;
   color: #ffffff;
   border: none;
   padding: 14px;
@@ -444,7 +446,7 @@ body {
 }
 
 .btn-checkout:hover {
-  background-color: #00337c;
+  background-color: #ff4e00;
 }
 
 /* COMPOSANT PANIER VIDE */
@@ -474,7 +476,7 @@ body {
 
 .btn-back-home {
   display: inline-block;
-  background-color: #004aad;
+  background-color: #ff4e00;
   color: #ffffff;
   text-decoration: none;
   padding: 12px 24px;
@@ -485,7 +487,7 @@ body {
 }
 
 .btn-back-home:hover {
-  background-color: #00337c;
+  background-color: #ff4e00;
 }
 
 /* RESPONSIVE STRUCTURE PANIER */
@@ -568,7 +570,7 @@ body {
 }
 
 .filter-select:focus {
-  border-color: #004AAD;
+  border-color: #ff4e00;
 }
 
 /* MESSAGE AUCUN PRODUIT */
@@ -703,7 +705,7 @@ body {
 }
 
 .admin-badge {
-  background-color: #0071e3;
+  background-color: #ff4e00;
   color: #ffffff;
   padding: 6px 14px;
   border-radius: 20px;
@@ -760,7 +762,7 @@ body {
 }
 
 .admin-order-id {
-  color: #0071e3;
+  color: #ff4e00;
 }
 
 .admin-status-pill {
@@ -865,7 +867,7 @@ body {
 }
 
 .admin-select:focus {
-  border-color: #0071e3;
+  border-color: #ff4e00;
 }
 
 .admin-actions-summary {
@@ -965,7 +967,7 @@ body {
 
 .payment-header-icon {
   font-size: 40px;
-  color: #0071e3;
+  color: #ff4e00;
   margin-bottom: 10px;
 }
 
@@ -994,7 +996,7 @@ body {
 
 .payment-method-title {
   display: block;
-  color: #0071e3;
+  color: #ff4e00;
   border-bottom: 1px solid #d2d2d7;
   padding-bottom: 6px;
   margin-bottom: 12px;
@@ -1034,7 +1036,7 @@ body {
 .btn-modal-confirm {
   width: 100%;
   padding: 14px;
-  background-color: #0071e3;
+  background-color: #ff4e00;
   color: #ffffff;
   border: none;
   border-radius: 8px;
@@ -1045,7 +1047,7 @@ body {
 }
 
 .btn-modal-confirm:hover {
-  background-color: #0077ed;
+  background-color: #ff4e00;
 }
 
 .btn-modal-confirm:active {
@@ -1174,7 +1176,7 @@ body {
 
 .form-group input:focus,
 .form-group textarea:focus {
-  border-color: #004AAD;
+  border-color: #ff4e00;
 }
 
 .form-group textarea {
@@ -1182,7 +1184,7 @@ body {
 }
 
 .btn-send-message {
-  background-color: #004AAD;
+  background-color: #ff4e00;
   color: #ffffff;
   border: none;
   padding: 12px 24px;
@@ -1195,7 +1197,7 @@ body {
 }
 
 .btn-send-message:hover {
-  background-color: #00337C;
+  background-color: #ff4e00;
 }
 
 /* COLONNE D'INFOS PRATIQUES */
@@ -1226,7 +1228,7 @@ body {
   height: 36px;
   border-radius: 4px;
   background-color: #f2f2f7;
-  color: #004AAD;
+  color: #fc5710;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -1251,7 +1253,7 @@ body {
 .info-link {
   font-size: 14px;
   font-weight: 500;
-  color: #004AAD;
+  color: #ff4e00;
   text-decoration: none;
   display: inline-block;
   margin-bottom: 2px;
@@ -1325,8 +1327,7 @@ body {
 .slide-bg-img, .banner-bg-img {
   position: absolute;
   inset: 0;
-  margin: auto;
-  width: fit-content;
+  width: 100%;
   height: 100%;
   object-fit: cover;
   object-position: center;
@@ -1410,7 +1411,7 @@ body {
 }
 
 .dot-active {
-  background-color: #004AAD; /* Ton bleu de marque pour l'état actif */
+  background-color: #f5520d; /* Ton bleu de marque pour l'état actif */
   transform: scale(1.2);
 }
 
@@ -1631,74 +1632,142 @@ body {
 
 
 
-/* --- STYLE DES PAGES LÉGALES --- */
-.legal-container {
+
+
+.btn-see-more {
+  background-color: #000000;
+  color: #ffffff;
+  font-size: 15px;
+  font-weight: 600;
+  padding: 12px 32px;
+  border: 1px solid #000000;
+  border-radius: 8px;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s ease-in-out;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.btn-see-more:hover {
+  background-color: #1a1a1a;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
+}
+
+.btn-see-more:active {
+  transform: translateY(0);
+}
+
+.btn-see-more i {
+  transition: transform 0.2s ease-in-out;
+}
+
+.btn-see-more:hover i {
+  transform: translateX(4px); /* Petit effet de flèche qui bouge au survol */
+}
+
+
+
+
+/* Style de base pour la page CGV */
+.cgv-container {
+  font-family: 'Poppins', sans-serif;
   max-width: 900px;
-  margin: 40px auto;
-  padding: 0 20px;
-  color: #374151;
+  margin: 0 auto;
+  padding: 3rem 1.5rem;
+  color: #1e293b;
   line-height: 1.7;
-  font-family: inherit;
 }
 
-.legal-title {
-  font-size: 32px;
-  font-weight: 800;
-  color: #111827;
-  margin-bottom: 8px;
+.cgv-header {
+  text-align: center;
+  margin-bottom: 3rem;
+  padding-bottom: 1.5rem;
+  border-bottom: 2px solid #f1f5f9;
 }
 
-.legal-updated {
-  font-size: 14px;
-  color: #6B7280;
-  margin-bottom: 32px;
-  border-bottom: 1px solid #E5E7EB;
-  padding-bottom: 16px;
-}
-
-.legal-section {
-  margin-bottom: 28px;
-}
-
-.legal-section h2 {
-  font-size: 20px;
+.cgv-title {
+  font-size: 2.25rem;
   font-weight: 700;
-  color: #111827;
-  margin-bottom: 12px;
+  color: #0f172a;
+  margin-bottom: 0.5rem;
+  letter-spacing: -0.02em;
 }
 
-.legal-section p {
-  font-size: 15px;
-  margin-bottom: 12px;
+.cgv-subtitle {
+  font-size: 0.9rem;
+  color: #64748b;
+  text-transform: capitalize;
 }
 
-.legal-section ul {
-  margin-left: 20px;
-  margin-bottom: 12px;
-  list-style-type: disc;
+.cgv-content {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
 }
 
-.legal-section li {
-  font-size: 15px;
-  margin-bottom: 6px;
+.cgv-section {
+  background-color: #ffffff;
+  padding: 1.5rem 2rem;
+  border-radius: 12px;
+  border: 1px solid #e2e8f0;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.02);
+  transition: box-shadow 0.2s ease;
 }
 
-.legal-section a {
-  color: var(--color-primary, #FF4E00); 
-  text-decoration: underline;
+.cgv-section:hover {
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+}
+
+.cgv-section h2 {
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: #0f172a;
+  margin-bottom: 1rem;
+}
+
+.cgv-section p {
+  font-size: 0.95rem;
+  color: #475569;
+  margin-bottom: 0.75rem;
+}
+
+.cgv-section p:last-child {
+  margin-bottom: 0;
+}
+
+.cgv-section strong {
+  color: #0f172a;
   font-weight: 600;
 }
- 
-.legal-section a:hover {
-  opacity: 0.8;
+
+/* Responsiveness pour écrans mobiles */
+@media (max-width: 640px) {
+  .cgv-container {
+    padding: 2rem 1rem;
+  }
+
+  .cgv-title {
+    font-size: 1.75rem;
+  }
+
+  .cgv-section {
+    padding: 1.25rem 1.25rem;
+  }
 }
 
-@media (max-width: 640px) {
-  .legal-title {
-    font-size: 24px;
-  }
-  
-  .legal-section h2 {
-    font-size: 18px;
-  }
+
+/* Style pour les listes dans les pages légales */
+.cgv-section ul {
+  margin-top: 0.5rem;
+  margin-bottom: 0.75rem;
+  padding-left: 1.25rem;
+}
+
+.cgv-section li {
+  font-size: 0.95rem;
+  color: #475569;
+  margin-bottom: 0.4rem;
 }

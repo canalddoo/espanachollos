@@ -69,7 +69,7 @@ export default function StripeCheckoutForm({ orderId, onSuccess }: StripeFormPro
         style={{
           width: "100%",
           padding: "6px",
-          background: "#0070f3",
+          background: "#ff4e00",
           color: "#fff",
           border: "none",
           borderRadius: "5px",
