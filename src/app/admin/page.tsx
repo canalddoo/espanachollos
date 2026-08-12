@@ -86,7 +86,7 @@ useEffect(() => {
   // Gérer la connexion
   const handleLogin = (e: React.FormEvent) => {
     e.preventDefault();
-    if (username === "Admin" && password === "Admin12") {
+    if (username === "Admin" && password === "Admin@9") {
       setIsAuthenticated(true);
       sessionStorage.setItem("admin_logged_in", "true");
       setLoginError("");
