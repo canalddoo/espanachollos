@@ -30,7 +30,7 @@ const SLIDES_DATA = [
     image: "https://images.unsplash.com/photo-1552346154-21d32810aba3?w=1000&auto=format&fit=crop&q=80",
     btnText: "Comprar mis Sneakers",
     link: "/produits?cat=mode"
-  },
+  }, 
   {
     id: 4,
     title: "Belleza y Hogar: Cuida de ti y de tu entorno",
