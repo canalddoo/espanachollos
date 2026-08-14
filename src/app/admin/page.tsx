@@ -139,32 +139,43 @@ export default function AdminPage() {
       alert("No se pudo eliminar el pedido.");
     }
   };
+// Charger les données bancaires au démarrage si authentifié
+  useEffect(() => {
+    if (!isAuthenticated) return;
+    fetch("/api/bank-details")
+      .then((res) => res.json())
+      .then((data) => {
+        if (data && !data.error) {
+          setBank({
+            beneficiary: data.beneficiary || "",
+            iban: data.iban || "",
+            bic: data.bic || "",
+          });
+        }
+      })
+      .catch(console.error);
+  }, [isAuthenticated]);
 
-  // Charger les données bancaires au démarrage si authentifié
-useEffect(() => {
-  if (!isAuthenticated) return;
-  fetch("/api/bank-details")
-    .then((res) => res.json())
-    .then((data) => setBank(data))
-    .catch(console.error);
-}, [isAuthenticated]);
-
-const handleBankUpdate = async (e: React.FormEvent) => {
-  e.preventDefault();
-  setSavingBank(true);
-  try {
-    const res = await fetch("/api/bank-details", {
-      method: "PUT",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(bank),
-    });
-    if (res.ok) alert("Datos bancarios actualizados correctamente.");
-  } catch (error) {
-    alert("Error al actualizar.");
-  } finally {
-    setSavingBank(false);
-  }
-};
+  const handleBankUpdate = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setSavingBank(true);
+    try {
+      const res = await fetch("/api/bank-details", {
+        method: "PUT",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(bank),
+      });
+      if (res.ok) {
+        alert("Datos bancarios actualizados correctamente.");
+      } else {
+        alert("Error al actualizar en la base de datos.");
+      }
+    } catch (error) {
+      alert("Error al actualizar.");
+    } finally {
+      setSavingBank(false);
+    }
+  };
 
 
   // ÉCRAN DE CONNEXION (Si non authentifié)
