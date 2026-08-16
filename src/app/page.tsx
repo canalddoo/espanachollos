@@ -38,6 +38,10 @@ const PRODUCTS_DATA = [
   { id: 60, name: "DREAME H15 Pro CarpetFlex aspiradora inalámbrica con mopa, aspiradora húmeda y seca con cepillos duales para pisos duros y alfombras, sin enredos", price: 349, category: "Dispositivos electrónicos", image: "/img/DREAMEH15Pro.jpg" },
   { id: 61, name: "Amazon Fire TV Stick 4K Select (última generación) + Ring Intercom Audio", price: 70, category: "Dispositivos electrónicos", image: "/img/AmazonFireTV.jpg" },
   { id: 63, name: "Smartwatch HUAWEI Watch FIT 5 (Blanco) + FreeBuds SE 4 (Beige), GPS, pantalla AMOLED de 1,82″, 2500 nits, ultraligero, pago NFC, 5 ATM, hasta 10 días de autonomía.", price: 215, category: "Dispositivos electrónicos", image: "/img/HUAWEIWatch.jpg" },
+  { id: 68, name: "DJI Osmo Pocket 4 Essential Bundle, cámara de vlogging de bolsillo con gimbal | Sensor CMOS de 1 pulgada y 4K/240 fps, estabilización de 3 ejes", price: 469, category: "Dispositivos electrónicos", image: "/img/BundleEssentielDJIOsmoPocket4.jpg" },
+  { id: 69, name: "DJI Osmo Pocket 3 + Transmisor Mic Mini (Negro Obsidiana), cámara para vlogging, micrófono inalámbrico", price: 399, category: "Dispositivos electrónicos", image: "/img/DJIOsmoPocket3.jpg" },
+
+  
   // Videojuegos
   { id: 17, name: "Sony, Consola PlayStation 5 Edición Estándar 1 TB con lector Blu-ray 4K, SSD Ultrarrápido, Audio 3D, Ray Tracing, 1 Mando DualSense con Retroalimentación Háptica", price: 509.99, category: "Dispositivos electrónicos", image: "/img/SonyConsolePlayStation5.jpg" },
   { id: 18, name: "Playstation Sony, Reproductor a Distancia Portal 5, Pantalla LCD Full HD de 8\", Juegos en Streaming vía Wi-Fi, Retroalimentación Háptica y Gatillos Adaptativos, Color Blanco", price: 220, category: "Dispositivos electrónicos", image: "/img/PlaystationSonyLecteur.jpg" },
@@ -51,8 +55,8 @@ const PRODUCTS_DATA = [
   { id: 50, name: "Dskeuzeew Bicicleta Estática Profesional para Gimnasio con Pantalla LCD y Portavasos, Estructura de Acero de 80 mm, Capacidad de 160 kg (Negro)", price: 240, category: "Deporte / Fitness", image: "/img/DskeuzeewVélo.jpg" },
   { id: 51, name: "UrbanLuxe Colchoneta de Gimnasia Inflable Air Tumble Track para Volteretas y Acrobacias", price: 90, category: "Deporte / Fitness", image: "/img/TapisdeGymnastique.jpg" },
   { id: 52, name: "PROIRON Tapis de Yoga Epais 10MM/15MM,Antidérapant Tapis d'exercice Fitness,Tapis de Gymnastique", price: 21.99, category: "Deporte / Fitness", image: "/img/PROIRONTapis.jpg" },
-  { id: 53, name: "Amazon Basics Slam Medicine Balls for Exercise", price: 16.99, category: "Deporte / Fitness", image: "/img/AmazonBasics.jpg" },
-  { id: 54, name: "QIANBAIYI Support d'haltères, à 3 positions, peu encombrant, pour la salle de gym à la maison et la salle de sport, organisateur pour haltères,", price: 90, category: "Deporte / Fitness", image: "/img/QIANBAIYISupport.jpg" },
+  { id: 53, name: "Balones medicinales Slam de Amazon Basics para ejercicio", price: 16.99, category: "Deporte / Fitness", image: "/img/AmazonBasics.jpg" },
+  { id: 54, name: "QIANBAIYI Soporte de cabestros, 3 posiciones, peu encombrant, para la sala de gimnasio de la casa y la sala de deportes, organizador para cabestros,", price: 90, category: "Deporte / Fitness", image: "/img/QIANBAIYISupport.jpg" },
   // ==========================================
   { id: 30, name: "MIXA - Sérum Booster de Hidratación Intensa 24H - Rellena e Ilumina", price: 6.99, category: "Belleza y cuidado", image: "/img/MIXASérumBooste.jpg" },
   { id: 32, name: "JEANNE ARTHES - Perfume para Hombre Sexy Boy Intense - Eau de Parfum - Frasco Vaporizador de 100 ml", price: 5.12, category: "Belleza y cuidado", image: "/img/JEANNEARTHES.jpg" },

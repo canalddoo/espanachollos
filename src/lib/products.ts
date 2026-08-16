@@ -34,6 +34,8 @@ export const PRODUCTS_DATA = [
   { id: 17, name: "Sony, Consola PlayStation 5 Edición Estándar 1 TB con lector Blu-ray 4K, SSD Ultrarrápido, Audio 3D, Ray Tracing, 1 Mando DualSense con Retroalimentación Háptica", price: 509.99, category: "Dispositivos electrónicos", image: "/img/SonyConsolePlayStation5.jpg" },
   { id: 18, name: "Playstation Sony, Reproductor a Distancia Portal 5, Pantalla LCD Full HD de 8\", Juegos en Streaming vía Wi-Fi, Retroalimentación Háptica y Gatillos Adaptativos, Color Blanco", price: 220, category: "Dispositivos electrónicos", image: "/img/PlaystationSonyLecteur.jpg" },
   { id: 19, name: "Nintendo Switch (OLED) Consola de Juegos Portátil de 17,8 cm, 64 GB, Pantalla Táctil, WiFi, Blanco", price: 209, category: "Dispositivos electrónicos", image: "/img/NintendoSwitch.jpg" },
+  { id: 68, name: "DJI Osmo Pocket 4 Essential Bundle, cámara de vlogging de bolsillo con gimbal | Sensor CMOS de 1 pulgada y 4K/240 fps, estabilización de 3 ejes", price: 469, category: "Dispositivos electrónicos", image: "/img/BundleEssentielDJIOsmoPocket4.jpg" },
+  { id: 69, name: "DJI Osmo Pocket 3 + Transmisor Mic Mini (Negro Obsidiana), cámara para vlogging, micrófono inalámbrico", price: 399, category: "Dispositivos electrónicos", image: "/img/DJIOsmoPocket3.jpg" },
 
   { id: 20, name: "PUMA Tazon 6 Fracture FM, Zapatillas para Hombre", price: 34.99, category: "Deporte / Fitness", image: "/img/PUMATazon6FractureFM.jpg" },
   { id: 21, name: "Puma Smash V2 L Zapatillas Unisex", price: 24.99, category: "Deporte / Fitness", image: "/img/PumaSmashV2LBasketsMixte.jpg" },
@@ -46,18 +48,22 @@ export const PRODUCTS_DATA = [
   { id: 49, name: "FabricBike Aero - Bicicleta de Piñón Fijo, Fixie Completa de Una Sola Velocidad, Cuadro de Aluminio", price: 599.99, category: "Deporte / Fitness", image: "/img/FabricBikeAero.jpg" },
   { id: 50, name: "Dskeuzeew Bicicleta Estática Profesional para Gimnasio con Pantalla LCD y Portavasos, Estructura de Acero de 80 mm, Capacidad de 160 kg (Negro)", price: 240, category: "Deporte / Fitness", image: "/img/DskeuzeewVélo.jpg" },
   { id: 51, name: "UrbanLuxe Colchoneta de Gimnasia Inflable Air Tumble Track para Volteretas y Acrobacias", price: 90, category: "Deporte / Fitness", image: "/img/TapisdeGymnastique.jpg" },
-  { id: 52, name: "PROIRON Tapis de Yoga Epais 10MM/15MM,Antidérapant Tapis d'exercice Fitness,Tapis de Gymnastique", price: 21.99, category: "Deporte / Fitness", image: "/img/PROIRONTapis.jpg" },
-  { id: 53, name: "Amazon Basics Slam Medicine Balls for Exercise", price: 16.99, category: "Deporte / Fitness", image: "/img/AmazonBasics.jpg" },
-  { id: 54, name: "QIANBAIYI Support d'haltères, à 3 positions, peu encombrant, pour la salle de gym à la maison et la salle de sport, organisateur pour haltères,", price: 90, category: "Deporte / Fitness", image: "/img/QIANBAIYISupport.jpg" },
+  { id: 52, name: "Esterilla de yoga gruesa PROIRON (10 mm/15 mm), esterilla antideslizante para ejercicios y fitness, esterilla para gimnasio", price: 21.99, category: "Deporte / Fitness", image: "/img/PROIRONTapis.jpg" },
+  { id: 53, name: "Balones medicinales Slam de Amazon Basics para ejercicio", price: 16.99, category: "Deporte / Fitness", image: "/img/AmazonBasics.jpg" },
+  { id: 54, name: "Soporte para mancuernas de 3 niveles QIANBAIYI: organizador que ahorra espacio para gimnasios domésticos y comerciales.", price: 90, category: "Deporte / Fitness", image: "/img/QIANBAIYISupport.jpg" },
   // ==========================================
   { id: 30, name: "MIXA - Sérum Booster de Hidratación Intensa 24H - Rellena e Ilumina", price: 6.99, category: "Belleza y cuidado", image: "/img/MIXASérumBooste.jpg" },
   { id: 31, name: "CeraVe Crema Hidratante para Rostro y Cuerpo, Hidratación 48H, Tecnología MVE + 3 Ceramidas + Ácido Hialurónico", price: 16.25, category: "Belleza y cuidado", image: "/img/CeraVeBaume.jpg" },
   { id: 32, name: "JEANNE ARTHES - Perfume para Hombre Sexy Boy Intense - Eau de Parfum - Frasco Vaporizador de 100 ml", price: 5.12, category: "Belleza y cuidado", image: "/img/JEANNEARTHES.jpg" },
   { id: 67, name: "Loción solar Garnier Ambre Solaire Sensitive Expert+ SPF 50+, protector solar muy ligero y sin residuos para pieles claras y sensibles, 1 x 175 ml (paquete de 2)", price: 17.99, category: "Belleza y cuidado", image: "/img/GarnierAmbre.jpg" },
+ 
   // ==========================================
+ 
   { id: 36, name: "Ninja Foodi FlexDrawer Freidora de Aire, Dual Zone Con Separador Extraíble", price: 156, category: "Cocina", image: "/img/NinjaFoodiFlexDrawerAir.jpg" },
   { id: 37, name: "ECOVACS T50 Omni GEN2 Robot Aspirador con Estación, Potencia de 21000 Pa, Cepillo lateral y mopa", price: 270, category: "Hogar", image: "/img/ECOVACST50OmniGEN2Aspirateur.jpg" },
   { id: 38, name: "SNDOAS Placa de Gas de 4 Fuegos Cristal Blanco, Placa de Gas Integrable", price: 130, category: "Cocina", image: "/img/SNDOASPlaque.jpg" },
   { id: 48, name: "GASLAND GIH604BF Placa Mixta de Gas e Inducción 60 cm, Gas 5200 W con quemador wok, Inducción 3500 W con función Barbacoa, Cristal negro integrable (Sin sartén)", price: 350, category: "Cocina", image: "/img/GASLANDGIH604BF.jpg" },
   { id: 62, name: "Moulinex XXL Dual Easy Fry 11 L: Freidora de aire de doble cesta para más de 8 personas, dos cestas (6,5 L + 4,5 L), 7 programas automáticos, EZ9428F0", price: 126, category: "Cocina", image: "/img/MoulinexXXL.jpg" }
+
+
 ];
