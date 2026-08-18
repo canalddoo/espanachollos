@@ -104,7 +104,7 @@ export default function PoliticaEnvio() {
       <p>
         <strong>Email:</strong> contact@espanachollos.es
         <br />
-        <strong>Teléfono:</strong> +34 666 754 415
+        <strong>Teléfono:</strong> +34 727 745 478
       </p>
     </div>
   );
