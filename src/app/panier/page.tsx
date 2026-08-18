@@ -193,7 +193,7 @@ export default function CartPage() {
               <p style={{ fontSize: "14px", color: "#666", lineHeight: "1.4" }}>
                 Seleccione cómo desea pagar su pedido <strong>#{currentOrderRef}</strong> por un total de <strong>{totalPrice.toLocaleString()} €</strong>.
               </p>
-            </div>
+            </div> 
 
             {/* Onglets de sélection */}
             <div style={{ display: "flex", gap: "8px", marginBottom: "15px" }}>
