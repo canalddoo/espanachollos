@@ -18,7 +18,7 @@ export default function Footer() {
           <p className="footer-contact-info">
             <strong>Teléfono:</strong> <a href="tel:+34727745478">+34 727 745 478</a><br />
             <strong>Email:</strong> <a href="mailto:contact@espanachollos.es">contact@espanachollos.es</a><br />
-            <strong>CIF / NIF:</strong> B-88765432
+            <strong>SIRET</strong> 95407617000016
           </p>
         </div>
 

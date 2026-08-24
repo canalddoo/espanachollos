@@ -112,7 +112,7 @@ export default function Navbar() {
                 Contacto
               </Link>
             </li>
-          </ul>
+          </ul> 
 
           {/* Número de teléfono a la derecha */}
           <div className="nav-phone">
