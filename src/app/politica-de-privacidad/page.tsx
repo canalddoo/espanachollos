@@ -11,10 +11,10 @@ export default function PoliticaPrivacidad() {
       </header>
 
       <div className="cgv-content">
-        <section className="cgv-section">
+       <section className="cgv-section">
           <h2>1. Responsable del Tratamiento de Datos</h2>
           <p>
-            En <strong>ESPANA CHOLLOS</strong> nos tomamos muy en serio la protección de sus datos personales. De conformidad con el Reglamento General de Protección de Datos (RGPD) y las leyes locales aplicables, le informamos que sus datos serán tratados de forma transparente, confidencial y segura.
+            En <strong>ESPANA CHOLLOS</strong> (con sede social en 6 Rue Bahédja Ndriri, 97620 Bouéni - Francia, y SIRET 95407617000016) nos tomamos muy en serio la protección de sus datos personales. De conformidad con el Reglamento General de Protección de Datos (RGPD) y las leyes locales aplicables, le informamos que sus datos serán tratados de forma transparente, confidencial y segura.
           </p>
         </section>
 

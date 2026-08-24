@@ -119,19 +119,19 @@ export default function ContactPage() {
               </div>
             </div>
 
-            <div className="info-item">
-              <div className="info-icon">
-                <i className="fas fa-map-marker-alt"></i>
-              </div>
-              <div className="info-text">
-                <h3>Nuestra Sede Social</h3>
-                <p className="info-address">
-                  Calle Gran Vía 28, Planta 4<br />
-                  28013 Madrid, España
-                </p>
-                <p className="info-cif"><strong>SIRET :</strong> 95407617000016</p>
-              </div>
-            </div>
+           <div className="info-item">
+  <div className="info-icon">
+    <i className="fas fa-map-marker-alt"></i>
+  </div>
+  <div className="info-text">
+    <h3>Nuestra Sede Social</h3>
+    <p className="info-address">
+      6 Rue Bahédja Ndriri<br />
+      97620 Bouéni - Francia
+    </p>
+    <p className="info-cif"><strong>SIRET :</strong> 95407617000016</p>
+  </div>
+</div>
 
             <div className="info-item">
               <div className="info-icon">

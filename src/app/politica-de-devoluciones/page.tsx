@@ -1,3 +1,5 @@
+import React from 'react';
+
 export default function PoliticaDevoluciones() {
   return (
     <div className="legal-page-container" style={{ padding: "40px 20px", maxWidth: "900px", margin: "0 auto" }}>
@@ -40,8 +42,8 @@ export default function PoliticaDevoluciones() {
       <h2>6. Dirección de Devolución</h2>
       <p>
         <strong>ESPANA CHOLLOS - Departamento de Devoluciones</strong><br />
-        Calle Gran Vía 28, Planta 4<br />
-        28013 Madrid, España
+        6 Rue Bahédja Ndriri<br />
+        97620 Bouéni - Francia
       </p>
     </div>
   );

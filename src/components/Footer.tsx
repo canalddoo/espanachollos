@@ -9,18 +9,18 @@ export default function Footer() {
       <div className="footer-container">
         
         {/* Colonne 1 : Entreprise et adresse complète */}
-        <div className="footer-col">
-          <h3>ESPANA CHOLLOS</h3>
-          <p className="footer-company-info">
-            Calle Gran Vía 28, Planta 4<br />
-            28013 Madrid, España
-          </p>
-          <p className="footer-contact-info">
-            <strong>Teléfono:</strong> <a href="tel:+34727745478">+34 727 745 478</a><br />
-            <strong>Email:</strong> <a href="mailto:contact@espanachollos.es">contact@espanachollos.es</a><br />
-            <strong>SIRET</strong> 95407617000016
-          </p>
-        </div>
+<div className="footer-col">
+  <h3>ESPANA CHOLLOS</h3>
+  <p className="footer-company-info">
+    6 Rue Bahédja Ndriri<br />
+    97620 Bouéni - Francia
+  </p>
+  <p className="footer-contact-info">
+    <strong>Teléfono:</strong> <a href="tel:+34727745478">+34 727 745 478</a><br />
+    <strong>Email:</strong> <a href="mailto:contact@espanachollos.es">contact@espanachollos.es</a><br />
+    <strong>SIRET:</strong> 95407617000016
+  </p>
+</div>
 
         {/* Colonne 2 : Politiques légales */}
         <div className="footer-col">
