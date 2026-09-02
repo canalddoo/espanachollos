@@ -1,9 +1,10 @@
 "use client";
- 
+
 import { useState, useMemo } from "react";
 import { useCart } from "@/context/CartContext";
 import { useRouter } from "next/navigation";
 import { PRODUCTS_DATA } from "@/lib/products";
+import Link from "next/link";
 
 export default function ProductsPage() {
   const { addToCart } = useCart();
@@ -90,18 +91,26 @@ export default function ProductsPage() {
         {filteredAndSortedProducts.map((product) => (
           <div key={product.id} className="product-card">
             
-            <div className="product-image-wrapper">
+            {/* Image cliquable vers la page du produit */}
+            <Link href={`/produits/${product.id}`} className="product-image-wrapper">
               <img 
                 src={product.image} 
                 alt={product.name}
                 className="product-img"
                 loading="lazy"
               />
-            </div>
+            </Link>
 
             <div className="product-info">
               <span className="product-cat">{product.category}</span>
-              <h3 className="product-name">{product.name}</h3>
+              
+              {/* Titre cliquable vers la page du produit */}
+              <h3 className="product-name">
+                <Link href={`/produits/${product.id}`} style={{ textDecoration: "none", color: "inherit" }}>
+                  {product.name}
+                </Link>
+              </h3>
+
               <p className="product-price">{product.price.toLocaleString()} €</p>
               
               <div className="product-card-actions">
