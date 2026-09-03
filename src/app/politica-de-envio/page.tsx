@@ -105,6 +105,8 @@ export default function PoliticaEnvio() {
         <strong>Email:</strong> contact@espanachollos.es
         <br />
         <strong>Teléfono:</strong> +34 727 745 478
+        <br />
+        <strong>Dirección:</strong> Puerta del Sol, 5, 28013 Madrid
       </p>
     </div>
   );

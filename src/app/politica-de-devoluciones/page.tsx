@@ -42,8 +42,7 @@ export default function PoliticaDevoluciones() {
       <h2>6. Dirección de Devolución</h2>
       <p>
         <strong>ESPANA CHOLLOS - Departamento de Devoluciones</strong><br />
-        6 Rue Bahédja Ndriri<br />
-        97620 Bouéni - Francia
+        Puerta del Sol, 5, 28013 Madrid
       </p>
     </div>
   );
