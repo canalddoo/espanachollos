@@ -12,8 +12,7 @@ export default function Footer() {
 <div className="footer-col">
   <h3>ESPANA CHOLLOS</h3>
   <p className="footer-company-info">
-    6 Rue Bahédja Ndriri<br />
-    97620 Bouéni - Francia
+    Puerta del Sol, 5, 28013 Madrid
   </p>
   <p className="footer-contact-info">
     <strong>Teléfono:</strong> <a href="tel:+34727745478">+34 727 745 478</a><br />
