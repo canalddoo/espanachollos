@@ -3,13 +3,13 @@
 import { useCart } from "@/context/CartContext";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
-// Selección de los mejores productos reales de tu lista PRODUCTS_DATA
 
+// Selección de los mejores productos reales de tu lista PRODUCTS_DATA
 const FEATURED_PRODUCTS = [
   // --- DISPOSITIVOS ELECTRÓNICOS Y GAMING ---
   { 
     id: 10, 
-    name: "Apple iPhone 16 (128 GB) - Cian + Funda Transparente con MagSafe", 
+    name: "Apple iPhone 16 (128 GB) Cian - Botón de Control de Cámara + Funda MagSafe - Reacondicionado", 
     price: 639.99, 
     category: "Dispositivos electrónicos", 
     image: "/img/iPhone16.jpg", 
@@ -17,7 +17,7 @@ const FEATURED_PRODUCTS = [
   },
   { 
     id: 9, 
-    name: "iPhone 15 Pro Max", 
+    name: "iPhone 15 Pro Max 256GB - Diseño de Titanio, Zoom Óptico 5x, Chip A17 Pro 6.7\" - Reacondicionado", 
     price: 489.99, 
     category: "Dispositivos electrónicos", 
     image: "https://c0.lestechnophiles.com/images.frandroid.com/wp-content/uploads/2023/09/iphone-15-pro-max-768x768.png?webp=1&key=6d7ed62f", 
@@ -25,7 +25,7 @@ const FEATURED_PRODUCTS = [
   },
   { 
     id: 4, 
-    name: "iPhone 13", 
+    name: "iPhone 13 128GB - Chip A15 Bionic, Modo Cine, Pantalla Super Retina 6.1\" - Reacondicionado", 
     price: 389.99, 
     category: "Dispositivos electrónicos", 
     image: "https://c0.lestechnophiles.com/images.frandroid.com/wp-content/uploads/2021/09/apple-iphone-13-frandroid-2021-768x768.png?webp=1&key=a6b052d7", 
@@ -134,7 +134,6 @@ const FEATURED_PRODUCTS = [
     tag: "Tendencia" 
   }
 ];
-
 
 export default function FeaturedPage() {
   const { addToCart } = useCart();
