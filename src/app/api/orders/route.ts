@@ -35,7 +35,16 @@ export async function GET() {
 // POST : Créer une nouvelle commande
 export async function POST(req: Request) {
   try {
-    const body = await req.json();
+    // Vérification de la présence du corps de la requête
+    const textBody = await req.text();
+    if (!textBody || textBody.trim() === "") {
+      return NextResponse.json(
+        { error: "El cuerpo de la solicitud está vacío." },
+        { status: 400 }
+      );
+    }
+
+    const body = JSON.parse(textBody);
     const { id, date, total, items, customerName, address, city, contact } = body;
 
     // Validation des données
@@ -43,6 +52,7 @@ export async function POST(req: Request) {
       !id ||
       total === undefined ||
       !items ||
+      !Array.isArray(items) ||
       items.length === 0 ||
       !customerName ||
       !address ||
@@ -55,10 +65,10 @@ export async function POST(req: Request) {
       );
     }
 
-    // 1. Enregistrement de la commande avec infos client
+    // 1. Enregistrement de la commande
     await db.insert(orders).values({
       id,
-      date,
+      date: date || new Date().toISOString(),
       total,
       status: "Pendiente de pago",
       customerName,

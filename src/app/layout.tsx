@@ -8,8 +8,6 @@ import { CartProvider } from "@/context/CartContext";
 export const metadata: Metadata = {
   metadataBase: new URL("https://espanchollos.es"),
 
-  
-
   title: {
     default: "Espanachollos | Tienda Online en España",
     template: "%s | Espanachollos",
@@ -34,7 +32,6 @@ export const metadata: Metadata = {
     "accesorios",
     "envío rápido",
   ],
-
 
   authors: [
     {
@@ -103,7 +100,7 @@ export default function RootLayout({
   children,
 }: Readonly<{ children: React.ReactNode }>) {
   return (
-    <html lang="es">
+    <html lang="es" suppressHydrationWarning>
       <head>
         <link
           rel="stylesheet"
@@ -111,8 +108,6 @@ export default function RootLayout({
           crossOrigin="anonymous"
           referrerPolicy="no-referrer"
         />
-
-
 
         <link rel="preconnect" href="https://fonts.gstatic.com" />
 
@@ -122,7 +117,7 @@ export default function RootLayout({
         />
       </head>
 
-      <body>
+      <body suppressHydrationWarning>
         <CartProvider>
           <Navbar />
           <main>{children}</main>

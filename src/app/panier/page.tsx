@@ -5,31 +5,28 @@ import Link from "next/link";
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 
-// Imports Stripe requis
-import { loadStripe } from "@stripe/stripe-js";
-import { Elements } from "@stripe/react-stripe-js";
-import StripeCheckoutForm from "@/components/StripeCheckoutForm";
-
-// Initialisation de Stripe avec ta clé publique
-const stripePromise = loadStripe(process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY as string);
-
 export default function CartPage() {
   const { cart, clearCart, updateQuantity, removeFromCart } = useCart() as any;
-  const [showSuccessPopup, setShowSuccessPopup] = useState(false); // Étape 1 : Commande reçue
-  const [showPaymentModal, setShowPaymentModal] = useState(false); // Étape 2 : Choix du paiement
+  const [showSuccessPopup, setShowSuccessPopup] = useState(false);
+  const [showPaymentModal, setShowPaymentModal] = useState(false);
   const [currentOrderRef, setCurrentOrderRef] = useState("");
-  const [isSubmitting, setIsSubmitting] = useState(false); 
+  const [isSubmitting, setIsSubmitting] = useState(false);
   const router = useRouter();
 
-  // États pour Stripe et les méthodes de paiement
-  const [paymentMethod, setPaymentMethod] = useState<"card" | "bank" | null>(null);
-  const [clientSecret, setClientSecret] = useState<string | null>(null);
+  const [paymentMethod, setPaymentMethod] = useState<"bank">("bank");
   const [bankInfo, setBankInfo] = useState({ beneficiary: "Cargando...", iban: "Cargando...", bic: "Cargando..." });
   const [showEmailPromptPopup, setShowEmailPromptPopup] = useState(false);
 
+  // Champs requis par la base de données / API
+  const [customerData, setCustomerData] = useState({
+    customerName: "",
+    address: "",
+    city: "",
+    contact: "",
+  });
+
   const totalPrice = cart.reduce((acc: number, item: any) => acc + item.price * item.quantity, 0);
 
-  // Charger les données bancaires au cas où le client choisit le virement
   useEffect(() => {
     fetch("/api/bank-details")
       .then((res) => res.json())
@@ -39,8 +36,19 @@ export default function CartPage() {
       .catch(console.error);
   }, []);
 
-  const handleCheckout = async () => {
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setCustomerData({ ...customerData, [e.target.name]: e.target.value });
+  };
+
+  const handleCheckout = async (e: React.FormEvent) => {
+    e.preventDefault();
     if (isSubmitting) return;
+
+    if (!customerData.customerName || !customerData.address || !customerData.city || !customerData.contact) {
+      alert("Por favor, rellene todos los campos de envío obligatorios.");
+      return;
+    }
+
     setIsSubmitting(true);
 
     const orderRef = Math.floor(100000 + Math.random() * 900000).toString();
@@ -48,13 +56,13 @@ export default function CartPage() {
 
     const newOrder = {
       id: orderRef,
-      date: new Date().toLocaleString("es-ES"),
+      date: new Date().toISOString(),
       items: cart,
-      total: totalPrice
+      total: totalPrice,
+      ...customerData,
     };
 
     try {
-      // 1. Envoi de la commande à l'admin
       const response = await fetch("/api/orders", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
@@ -62,22 +70,10 @@ export default function CartPage() {
       });
 
       if (response.ok) {
-        // 2. Demander un ticket de paiement (Client Secret)
-        const stripeRes = await fetch("/api/create-payment-intent", {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ items: cart, orderId: orderRef }),
-        });
-        const stripeData = await stripeRes.json();
-        
-        if (stripeData.clientSecret) {
-          setClientSecret(stripeData.clientSecret);
-        }
-
-        // Étape 3 : Afficher le premier popup de succès
         setShowSuccessPopup(true);
       } else {
-        alert("Hubo un error al procesar el pedido en el servidor.");
+        const errData = await response.json();
+        alert(errData.error || "Hubo un error al procesar el pedido en el servidor.");
       }
     } catch (error) {
       console.error(error);
@@ -89,13 +85,7 @@ export default function CartPage() {
 
   const handleProceedToPaymentType = () => {
     setShowSuccessPopup(false);
-    setShowPaymentModal(true); // Ouvre le grand modal de sélection de paiement
-  };
-
-  const handlePaymentSuccess = () => {
-    // Ouvre le popup d'envoi d'e-mail et ferme le modal de sélection de paiement
-    setShowPaymentModal(false);
-    setShowEmailPromptPopup(true);
+    setShowPaymentModal(true);
   };
 
   const handleFinalizeOrder = () => {
@@ -148,20 +138,61 @@ export default function CartPage() {
           ))}
         </div>
 
-        {/* Panneau de résumé de commande */}
+        {/* Panneau de résumé et données de livraison */}
         <div className="cart-summary-card">
           <h3>Resumen del pedido</h3>
           <div className="summary-row"><span>Subtotal</span><span>{totalPrice.toLocaleString()} €</span></div>
           <div className="summary-row"><span>Envío</span><span className="free-shipping">Gratis</span></div>
           <div className="summary-divider"></div>
           <div className="summary-row total-row"><span>Total</span><span>{totalPrice.toLocaleString()} €</span></div>
-          <button className="btn-checkout" onClick={handleCheckout} disabled={isSubmitting} type="button">
-            {isSubmitting ? "Procesando..." : "Tramitar pedido"}
-          </button>
+
+          <form onSubmit={handleCheckout} style={{ marginTop: "20px" }}>
+            <h4 style={{ marginBottom: "10px", fontSize: "16px" }}>Datos de envío</h4>
+            <input
+              type="text"
+              name="customerName"
+              placeholder="Nombre completo"
+              value={customerData.customerName}
+              onChange={handleInputChange}
+              required
+              style={{ width: "100%", padding: "8px", marginBottom: "8px", borderRadius: "4px", border: "1px solid #ccc" }}
+            />
+            <input
+              type="text"
+              name="address"
+              placeholder="Dirección"
+              value={customerData.address}
+              onChange={handleInputChange}
+              required
+              style={{ width: "100%", padding: "8px", marginBottom: "8px", borderRadius: "4px", border: "1px solid #ccc" }}
+            />
+            <input
+              type="text"
+              name="city"
+              placeholder="Ciudad"
+              value={customerData.city}
+              onChange={handleInputChange}
+              required
+              style={{ width: "100%", padding: "8px", marginBottom: "8px", borderRadius: "4px", border: "1px solid #ccc" }}
+            />
+            <input
+              type="text"
+              name="contact"
+              placeholder="Teléfono / Email de contacto"
+              value={customerData.contact}
+              onChange={handleInputChange}
+              required
+              style={{ width: "100%", padding: "8px", marginBottom: "15px", borderRadius: "4px", border: "1px solid #ccc" }}
+            />
+
+            <button className="btn-checkout" disabled={isSubmitting} type="submit" style={{ width: "100%" }}>
+              {isSubmitting ? "Procesando..." : "Tramitar pedido"}
+            </button>
+          </form>
         </div>
       </div>
 
-      {/* 1. POPUP DE SUCCÈS (COMMANDE ENREGISTRÉE) */}
+      {/* 1. POPUP DE SUCCÈS */}
       {showSuccessPopup && (
         <div className="payment-modal-overlay" style={{ zIndex: 9999 }}>
           <div className="payment-modal-card" style={{ textAlign: "center", padding: "40px 30px" }}>
@@ -184,7 +215,7 @@ export default function CartPage() {
         </div>
       )}
 
-      {/* 2. LE GRAND MODAL DE PAIEMENT (STRIPE OU VIREMENT) */}
+      {/* 2. MODAL DE PAIEMENT */}
       {showPaymentModal && (
         <div className="payment-modal-overlay" style={{ zIndex: 9998 }}>
           <div className="payment-modal-card" style={{ maxWidth: "450px", padding: "20px" }}>
@@ -195,28 +226,7 @@ export default function CartPage() {
               </p>
             </div> 
 
-            {/* Onglets de sélection */}
             <div style={{ display: "flex", gap: "8px", marginBottom: "15px" }}>
-{/*              
-              <button 
-                onClick={() => setPaymentMethod("card")}
-                style={{ 
-                  flex: 1, 
-                  padding: "8px 10px",
-                  fontSize: "14px",
-                  borderRadius: "6px", 
-                  border: "2px solid", 
-                  borderColor: paymentMethod === "card" ? "#ff4e00" : "#ccc", 
-                  background: paymentMethod === "card" ? "#fff5f0" : "#fff", 
-                  color: paymentMethod === "card" ? "#ff4e00" : "#333",
-                  cursor: "pointer", 
-                  fontWeight: "bold" 
-                }}
-                type="button"
-              >
-                <i className="far fa-credit-card"></i> Tarjeta
-              </button> */}
-
               <button 
                 onClick={() => setPaymentMethod("bank")}
                 style={{ 
@@ -225,9 +235,9 @@ export default function CartPage() {
                   fontSize: "14px",
                   borderRadius: "6px", 
                   border: "2px solid", 
-                  borderColor: paymentMethod === "bank" ? "#ff4e00" : "#ccc", 
-                  background: paymentMethod === "bank" ? "#fff5f0" : "#fff", 
-                  color: paymentMethod === "bank" ? "#ff4e00" : "#333",
+                  borderColor: "#ff4e00", 
+                  background: "#fff5f0", 
+                  color: "#ff4e00",
                   cursor: "pointer", 
                   fontWeight: "bold" 
                 }}
@@ -237,39 +247,27 @@ export default function CartPage() {
               </button>
             </div>
 
-            {/* CONTENU OPTION 1 : FORMULAIRE STRIPE */}
-            {paymentMethod === "card" && clientSecret && (
-              <div style={{ background: "#f9f9f9", padding: "15px", borderRadius: "8px", border: "1px solid #eee" }}>
-                <Elements stripe={stripePromise} options={{ clientSecret }}>
-                  <StripeCheckoutForm orderId={currentOrderRef} onSuccess={handlePaymentSuccess} />
-                </Elements>
+            <div>
+              <div className="payment-modal-details" style={{ marginTop: "10px" }}>
+                <strong className="payment-method-title">Pago por transferencia bancaria</strong>
+                <p><strong>Beneficiario:</strong> {bankInfo.beneficiary}</p>
+                <p><strong>IBAN:</strong> {bankInfo.iban}</p>
+                <p><strong>SWIFT/BIC:</strong> {bankInfo.bic}</p>
+                <p className="payment-reference-row"><strong>Referencia:</strong> Pedido #{currentOrderRef}</p>
               </div>
-            )}
-
-            {/* CONTENU OPTION 2 : VIREMENT BANCAIRE */}
-            {paymentMethod === "bank" && (
-              <div>
-                <div className="payment-modal-details" style={{ marginTop: "10px" }}>
-                  <strong className="payment-method-title">Pago por transferencia bancaria</strong>
-                  <p><strong>Beneficiario:</strong> {bankInfo.beneficiary}</p>
-                  <p><strong>IBAN:</strong> {bankInfo.iban}</p>
-                  <p><strong>SWIFT/BIC:</strong> {bankInfo.bic}</p>
-                  <p className="payment-reference-row"><strong>Referencia:</strong> Pedido #{currentOrderRef}</p>
-                </div>
-                <div className="payment-modal-notice" style={{ margin: "15px 0" }}>
-                  <i className="fas fa-info-circle"></i> 
-                  Después de realizar el pago, debe enviar el recibo por correo electrónico a <strong>contact@espanachollos.es</strong>.
-                </div>
-                <button onClick={handleFinalizeOrder} className="btn-modal-confirm" style={{ width: "100%" }} type="button">
-                  Entendido y Confirmar Pedido
-                </button>
+              <div className="payment-modal-notice" style={{ margin: "15px 0" }}>
+                <i className="fas fa-info-circle"></i> 
+                Después de realizar el pago, debe enviar el recibo por correo electrónico a <strong>contact@espanachollos.es</strong>.
               </div>
-            )}
+              <button onClick={handleFinalizeOrder} className="btn-modal-confirm" style={{ width: "100%" }} type="button">
+                Entendido y Confirmar Pedido
+              </button>
+            </div>
           </div>
         </div>
       )}
 
-      {/* 3. POPUP DE CONFIRMATION ET D'ENVOI D'E-MAIL APRÈS PAIEMENT */}
+      {/* 3. POPUP CONFIRMATION EMAIL */}
       {showEmailPromptPopup && (
         <div className="payment-modal-overlay" style={{ zIndex: 9999 }}>
           <div className="payment-modal-card" style={{ textAlign: "center", padding: "40px 30px", maxWidth: "450px" }}>
@@ -281,9 +279,8 @@ export default function CartPage() {
               Para agilizar el procesamiento y envío de su pedido <strong>#{currentOrderRef}</strong>, haga clic en el botón de abajo para enviarnos una confirmación a <strong>contact@espanachollos.es</strong>.
             </p>
             
-            {/* Bouton d'envoi de mail pré-rempli */}
             <a 
-              href={`mailto:contact@espanachollos.es?subject=Confirmación de Pago - Pedido %23${currentOrderRef}&body=Hola Espanachollos,%0D%0A%0D%0AHe realizado correctamente el pago con tarjeta para mi pedido %23${currentOrderRef}.%0D%0A%0D%0AUn saludo.`}
+              href={`mailto:contact@espanachollos.es?subject=Confirmación de Pago - Pedido %23${currentOrderRef}&body=Hola Espanachollos,%0D%0A%0D%0AHe realizado correctamente el pago con transferencia para mi pedido %23${currentOrderRef}.%0D%0A%0D%0AUn saludo.`}
               className="btn-see-more"
               style={{ 
                 display: "inline-flex", 
@@ -296,7 +293,6 @@ export default function CartPage() {
               Enviar Correo de Confirmación <i className="fas fa-paper-plane" style={{ marginLeft: "10px" }}></i>
             </a>
 
-            {/* Lien secondaire discret pour finaliser sans envoyer */}
             <button
               onClick={handleFinalizeOrder}
               style={{
